@@ -12,7 +12,7 @@ type ConfigDatabase struct {
 	Host string `yaml:"host" env:"host" env-default:"host" env-description:"server host"`
 	Name string `yaml:"name" env:"name" env-default:"name" env-description:"database name"`
 	User string `yaml:"user" env:"user" env-default:"user" env-description:"database user"`
-	Pass string `yaml:"pass" env:"pass" env-default:"pass" env-description:"database pass"`
+	Pass string `yaml:"pass" env:"pass" env-required:"true" env-description:"database pass"`
 }
 
 var cfg ConfigDatabase
