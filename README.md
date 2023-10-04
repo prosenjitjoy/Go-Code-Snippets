@@ -1,2 +1,2 @@
 # Go-Standard-Patterns
-Collection of idiomatic go standard library code examples.
+Collection of idiomatic go code examples.
