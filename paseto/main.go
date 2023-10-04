@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"time"
 
 	"aidanwoods.dev/go-paseto"
@@ -12,13 +13,20 @@ func main() {
 	token := paseto.NewToken()
 
 	token.SetIssuedAt(time.Now())
-	token.SetNotBefore(time.Now())
+	// token.SetNotBefore(time.Now())
 	token.SetExpiration(time.Now().Add(2 * time.Hour))
 
 	token.SetString("user-id", uuid.NewString())
 
-	key := paseto.NewV4SymmetricKey()
+	// key := paseto.NewV4SymmetricKey()
+	key, err := paseto.V4SymmetricKeyFromBytes([]byte("11111111222222223333333344444444"))
+	if err != nil {
+		log.Fatal(err)
+	}
 	fmt.Println(key.ExportHex())
+	fmt.Println(len(key.ExportHex()))
+	fmt.Println(key.ExportBytes())
+	fmt.Println(len(key.ExportBytes()))
 
 	encrypted := token.V4Encrypt(key, nil)
 	fmt.Println(encrypted)
@@ -30,6 +38,7 @@ func main() {
 	}
 
 	fmt.Println(string(newToken.ClaimsJSON()))
+	fmt.Println(newToken.Claims()["user-id"])
 
 	secretKey := paseto.NewV4AsymmetricSecretKey()
 	publicKey := secretKey.Public()
