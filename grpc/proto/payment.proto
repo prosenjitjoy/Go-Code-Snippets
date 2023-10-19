@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package = "main/proto";
+
+message CreatePaymentRequest {
+  int64 user_id = 1;
+  double price = 2;
+}
+
+message CreatePaymentResponse {
+  int64 bill_id = 1;
+}
+
+service Payment {
+  rpc Create(CreatePaymentRequest) returns (CreatePaymentResponse) {}
+}
